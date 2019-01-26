@@ -2,15 +2,75 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link rel="stylesheet" href="/assets/css/burger_style.css" type="text/css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<title>Eat Da Burger</title>
 		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
+
     <script>
     $(function() {
-        
-    })
+
+		$("#submitButton").on("click", function(event) {
+			event.preventDefault();
+			var newBurger = {
+				burger_name: $("#burgerField").val().trim()
+			};
+			//Prevents somone from submitting an empty burger. 
+			if (!newBurger.burger_name == "") {
+
+				$.ajax("/api", {
+					type: "POST",
+					data: newBurger
+				}).then(
+					function() {
+						location.reload();
+					}
+				);
+			} else {
+				alert("Please enter a burger")
+			}
+		});
+		
+		$(".devourButton").on("click", function(event) {
+			event.preventDefault();
+			var id = $(this).data("id");
+			var newdevoured = $(this).data("newdevoured");
+
+			var newStatus = {
+				devoured: newdevoured
+			};
+
+			$.ajax("/api/" + id, {
+				type: "PUT",
+				data: newStatus
+			}).then(
+				function(results) {
+					location.reload()
+				}
+			)
+		});
+
+		$("#clearButton").on("click", function(event) {
+			event.preventDefault();
+
+			$.ajax("/", {
+				type: "DELETE",
+			}).then(
+				function() {
+					console.log("Table Cleared");
+					location.reload();
+				}
+			);
+		});
+    });
     </script>
 	<body>
+		<div class="container">
 		{{{ body }}}
+		</div>
 	</body>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </html>

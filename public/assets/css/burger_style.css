@@ -1,0 +1,26 @@
+body {
+    background-color: #ffd54f;
+}
+
+#noDList, #dList {
+    text-align: center
+}
+
+#submitButton {
+    float: center
+}
+
+
+h1 {
+    text-align: center
+}
+
+.form-group {
+    text-align: center
+}
+
+li {
+    padding: 5px;
+    margin: 5px;
+    background: #faebd7;
+  }

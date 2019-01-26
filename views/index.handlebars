@@ -1,9 +1,39 @@
+<h1 style="color:#3e2723"> Eat-<span style="color:#dd2c00">D</span><span style="color:#64dd17">a</span>-Burger! </h1>
 
 
-<ul>
-  {{#each burgers}}
-      {{> burger-block}}
-  {{/each}}
-</ul>
+<div class="row">
+  <div class="col s6">
+    <ul id="noDList">
+      {{#each burgers}}
+        {{#unless devoured}}
+          {{> burger-block devour=true}}
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
 
+  <div class="col s6">
+    <ul id="dList">
+      {{#each burgers}}
+        {{#if devoured}}
+          {{> burger-block devour=false}}
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
 
+<br><br><br>
+
+<div class="row">
+  <div class="col s3"></div>
+  <div class="col s6">
+    <div class="form-group">
+        <input type="text" id="burgerField" name="name" style="height:50px">
+    </div>
+    <button type="submit" id="submitButton">Submit <i class="material-icons">fastfood</i></button>
+    <button type="clear" id="clearButton" style="float:right">Clear<i class="material-icons">clear</i></button>
+    <h6> Enter a burger you would like to eat and click the "Submit" button. Then click "Devour" to mark it off as devoured! To clear all bugers click the "Clear" button.</h6>
+  </div>
+  <div class="col s3"></div>
+</div>

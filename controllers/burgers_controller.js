@@ -15,17 +15,24 @@ router.get("/", function(req, res) {
     });
 });
 
-router.post("/api/:name", function(req, res) {
-    var name = req.params.name
-    burger.insert(name, function(res) {
-        res.json({id: res.id})
+router.delete("/", function(req, res) {
+    burger.delete(function(results) {
+        res.json(results);
+    });
+});
+
+router.post("/api", function(req, res) {
+    var name = req.body.burger_name
+    burger.insert(name, function(result) {
+        res.json({id: result.id})
     });
 });
 
 router.put("/api/:id", function(req, res) {
     var id = req.params.id
-    burger.update(id, function(res) {
+    burger.update(id, function(results) {
         console.log("burger " + id + " has been devoured!");
+        res.json(results)
     });
 });
 

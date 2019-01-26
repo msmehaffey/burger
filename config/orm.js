@@ -10,7 +10,7 @@ var orm = {
          });
      },
      insertOne: function(val, cb) {
-         var queryString = "INSERT INTO burgers(burger_name) VALUES(" + val + ")";
+         var queryString = "INSERT INTO burgers(burger_name) VALUES('" + val + "')";
          connection.query(queryString, function(err, result) {
              if (err) {
                  throw err;
@@ -26,7 +26,16 @@ var orm = {
              }
              cb (result);
          });
-     }
+     },
+
+    deleteAll: function(cb) {
+        connection.query("DELETE FROM burgers;", function(err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    }
 };
 
 module.exports = orm;
